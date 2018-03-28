@@ -6,17 +6,17 @@ include mixins/_pagination
 
 block content
   .inner
-    h2 Последни видеа
+    h2 Latest Tutorials
     .stores
       each video in videos
         +videoCard(video)
     .flex-center
-      a.button.button--show-all(href='/videos') Виж всички
-    h2(style='margin-top: 75px') Последни подкасти
+      a.button.button--show-all(href='/videos') See All
+    h2(style='margin-top: 75px') Latest Podcast Episodes
     .stores
       each podcast in podcasts
         +podcastCard(podcast)
     .flex-center
-      a.button.button--show-all(href='/podcast') Виж всички
+      a.button.button--show-all(href='/podcast') See All
 
-        
+

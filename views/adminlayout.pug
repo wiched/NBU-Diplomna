@@ -13,7 +13,7 @@ html
         nav.nav
           .nav__section.nav__section--pages
             li.nav__item
-              a.nav__link.nav__link--logo(href="/ataraxia") АДМИНИСТРАЦИЯ
+              a.nav__link.nav__link--logo(href="/ataraxia") Administration
             each item in h.adminMenu
               li.nav__item
                 a.nav__link(href=item.slug, class=(currentPath === item.slug ? 'nav__link--active' : ''))
@@ -23,20 +23,20 @@ html
               li.nav__item
                 a.nav__link(href="/ataraxia/addvideo", class=(currentPath === '/ataraxia/addvideo' ? 'nav__link--active' : ''))
                   != h.icon('add')
-                  span Добави видео
+                  span Add Tutorial
               li.nav__item
                 a.nav__link(href="/ataraxia/addpodcast", class=(currentPath === '/ataraxia/addpodcast' ? 'nav__link--active' : ''))
                   != h.icon('add')
-                  span Добави подкаст
+                  span Add Podcast
           //- .nav__section.nav__section--search
           //-   .search
-          //-     input.search__input(type="text" placeholder="Търсене..." name="search")
+          //-     input.search__input(type="text" placeholder="Search..." name="search")
               .search__results
           .nav__section.nav__section--user
             if user
               li.nav__item: a.nav__link(href="/logout", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))
                 != h.icon('logout')
-                span Изход
+                span Logout
               li.nav__item: a.nav__link(href="/account", class=(currentPath.startsWith('/account') ? 'nav__link--active' : ''))
                 img.avatar(src=user.gravatar + 'd=retro')
             if user
@@ -64,7 +64,7 @@ html
         footer.footer
           .inner
             - const year = new Date().getFullYear()
-            - const copyright = `${year} DevZone.BG, Всички права запазени.`
+            - const copyright = `${year} DevX-BG.COM, All right reserved.`
             p &copy; #{copyright}
     block scripts
       //script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)

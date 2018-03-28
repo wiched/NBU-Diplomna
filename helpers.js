@@ -12,7 +12,10 @@ exports.moment = require('moment');
 exports.dump = obj => JSON.stringify(obj, null, 2);
 
 // Making a static map is really long - this is a handy helper function to make one
-exports.staticMap = ([lng, lat]) => `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=800x150&key=${process.env.MAP_KEY}&markers=${lat},${lng}&scale=2`;
+exports.staticMap = ([lng, lat]) =>
+  `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=800x150&key=${
+    process.env.MAP_KEY
+  }&markers=${lat},${lng}&scale=2`;
 
 // inserting an SVG
 exports.icon = name => fs.readFileSync(`./public/images/icons/${name}.svg`);
@@ -22,18 +25,18 @@ exports.icon = name => fs.readFileSync(`./public/images/icons/${name}.svg`);
 exports.siteName = 'DevZone.BG';
 
 exports.menu = [
-  { slug: '/', title: 'Начало', icon: 'store', },
-  { slug: '/videos', title: 'Уроци', icon: 'video', },
-  { slug: '/podcast', title: 'Подкаст', icon: 'podcast', },
-  { slug: '/tags', title: 'Тагове', icon: 'tag', },
-  { slug: '/top', title: 'Топ', icon: 'top', },
-  { slug: '/about', title: 'За мен', icon: 'about', },
-  { slug: '/services', title: 'Услуги', icon: 'services', },
+  { slug: '/', title: 'Home', icon: 'store' },
+  { slug: '/videos', title: 'Tutorials', icon: 'video' },
+  { slug: '/podcast', title: 'Podcast', icon: 'podcast' },
+  { slug: '/tags', title: 'Tags', icon: 'tag' },
+  { slug: '/top', title: 'Top', icon: 'top' },
+  { slug: '/about', title: 'About', icon: 'about' },
+  { slug: '/services', title: 'Services', icon: 'services' }
 ];
 
 exports.adminMenu = [
-  { slug: '/ataraxia', title: 'Начало', icon: 'admin', },
-  { slug: '/ataraxia/videos', title: 'Видеа', icon: 'video', },
-  { slug: '/ataraxia/podcasts', title: 'Подкаст', icon: 'podcast', },
-  { slug: '/ataraxia/reviews', title: 'Коментари', icon: 'reviews', },
+  { slug: '/ataraxia', title: 'Home', icon: 'admin' },
+  { slug: '/ataraxia/videos', title: 'Tutorials', icon: 'video' },
+  { slug: '/ataraxia/podcasts', title: 'Podcast', icon: 'podcast' },
+  { slug: '/ataraxia/reviews', title: 'Comments', icon: 'reviews' }
 ];

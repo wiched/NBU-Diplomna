@@ -24,16 +24,16 @@ block content
 
   .single__details.inner
     img.single__cover(src=`/uploads/${podcast.photo || 'placeholder.jpg'}`)
-    p.single__location Първи епизод на DevZone.BG подкаст
+    //- p.single__location Първи епизод на DevZone.BG подкаст
 
     if podcast.podcast
       audio.podcast(controls='')
         source(src=`${podcast.podcast}`, type='audio/mpeg')
     if podcast.soundcloud
       .podcast
-        iframe(width='100%', height='166', scrolling='no', frameborder='no', src=`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${podcast.soundcloud}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=false`) 
-    p= podcast.description 
-    
+        iframe(width='100%', height='166', scrolling='no', frameborder='no', src=`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${podcast.soundcloud}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=false`)
+    p= podcast.description
+
     if podcast.tags
       ul.tags
         each tag in podcast.tags
@@ -43,9 +43,9 @@ block content
 
     if user
       +reviewForm(podcast)
-    else 
+    else
       +loginToComment()
-      
+
     if podcast.reviews
       .reviews
         each review in podcast.reviews

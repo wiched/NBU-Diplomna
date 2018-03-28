@@ -5,7 +5,7 @@ include mixins/_podcastCard
 
 block content
   .inner
-    h2 YouTube плейлисти
+    h2 YouTube Playlists
     ul.tags
       each t in tags2
         li.tag
@@ -15,7 +15,7 @@ block content
     .stores
       each video in videos
         +videoCard(video)
-    h2 Подкаст тагове 
+    h2 Podcast Tags
     ul.tags
       each t in tags
         li.tag

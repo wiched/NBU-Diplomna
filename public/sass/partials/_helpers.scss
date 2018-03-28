@@ -8,7 +8,7 @@
   border: 0;
   background: $yellow;
   color: $black;
-  font-family: 'Panama';
+  font-family: 'Tahoma';
   font-weight: 600;
   &--danger {
     background: $red;
@@ -31,16 +31,16 @@
   justify-content: center;
 }
 .avatar {
- min-width: 50px;
- height: 50px;
- border-radius: 50%;
- align-self: center;
+  min-width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-self: center;
 }
 
 .card {
   background: white;
   padding: 5rem;
-  box-shadow: 0 1px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
 }
 
 pre.error {
@@ -73,18 +73,18 @@ pre.error {
   position: fixed;
   overflow: hidden;
   box-sizing: border-box;
-  font-family: Helvetica,Calibri,Arial,sans-serif;
+  font-family: Helvetica, Calibri, Arial, sans-serif;
   font-size: 12px;
   line-height: 1.5em;
   display: flex;
   flex-wrap: nowrap;
   z-index: 9999;
   &.cc-floating {
-  padding: 2em;
-  max-width: 24em;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
+    padding: 2em;
+    max-width: 24em;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
   &.cc-banner {
     padding: 0.5em 1.8em;
     width: 100%;
@@ -97,26 +97,29 @@ pre.error {
   font-weight: 700;
 }
 
-.cc-btn, .cc-close, .cc-link {
+.cc-btn,
+.cc-close,
+.cc-link {
   cursor: pointer;
 }
 
 .cc-link {
-  opacity: .8;
+  opacity: 0.8;
   display: inline-block;
-  padding: .2em;
+  padding: 0.2em;
   &:hover {
     opacity: 1;
   }
-  &:active, &:visited {
+  &:active,
+  &:visited {
     color: initial;
   }
 }
 
 .cc-btn {
   display: block;
-  padding: .4em .8em;
-  font-size: .9em;
+  padding: 0.4em 0.8em;
+  font-size: 0.9em;
   font-weight: 700;
   border-width: 2px;
   border-style: solid;
@@ -162,7 +165,7 @@ pre.error {
 }
 
 .cc-btn + .cc-btn {
-  margin-left: .5em;
+  margin-left: 0.5em;
 }
 
 @media screen and (max-width: 900px) {
@@ -171,7 +174,8 @@ pre.error {
   }
 }
 
-@media screen and (max-width: 414px) and (orientation: portrait), screen and (max-width: 736px) and (orientation: landscape) {
+@media screen and (max-width: 414px) and (orientation: portrait),
+  screen and (max-width: 736px) and (orientation: landscape) {
   .cc-window {
     &.cc-bottom {
       bottom: 0;

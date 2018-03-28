@@ -7,28 +7,28 @@ block content
     h2= title
     .Table
       .Table-row.Table-header
-        .Table-row-item Заглавие
-        .Table-row-item.half-table Коментари
-        .Table-row-item.half-table Слушания
-        .Table-row-item.half-table Харесвания
-        .Table-row-item.half-table Сваляния
-        .Table-row-item.half-table Коментари
-        .Table-row-item.half-table Редактирай
-        .Table-row-item.half-table Изтриване
-        .Table-row-item.half-table Създадено
+        .Table-row-item Title
+        .Table-row-item.half-table Comments
+        .Table-row-item.half-table Listens
+        .Table-row-item.half-table Likes
+        .Table-row-item.half-table Downloads
+        .Table-row-item.half-table Comments
+        .Table-row-item.half-table Edit
+        .Table-row-item.half-table Delete
+        .Table-row-item.half-table Created
       each podcast in podcastsWithStats
         .Table-row
-          .Table-row-item(data-header='Заглавие')
+          .Table-row-item(data-header='Title')
             a(href=`/podcast/${podcast.slug}`) #{podcast.name}
-          .Table-row-item.half-table(data-header='Коментари') #{podcast.reviews.length}
-          .Table-row-item.half-table(data-header='Слушания') #{podcast.stats.playback_count}
+          .Table-row-item.half-table(data-header='Comments') #{podcast.reviews.length}
+          .Table-row-item.half-table(data-header='Listens') #{podcast.stats.playback_count}
           .Table-row-item.half-table(data-header='Харесвануя') #{podcast.stats.favoritings_count}
-          .Table-row-item.half-table(data-header='Сваляния') #{podcast.stats.download_count}
-          .Table-row-item.half-table(data-header='Коментари') #{podcast.stats.comment_count}
-          .Table-row-item.half-table(data-header='Редактирай')
-            a(href=`/ataraxia/podcasts/${podcast._id}/edit`) Редактирай
-          .Table-row-item.half-table(data-header='Изтриване')
+          .Table-row-item.half-table(data-header='Downloads') #{podcast.stats.download_count}
+          .Table-row-item.half-table(data-header='Comments') #{podcast.stats.comment_count}
+          .Table-row-item.half-table(data-header='Edit')
+            a(href=`/ataraxia/podcasts/${podcast._id}/edit`) Edit
+          .Table-row-item.half-table(data-header='Delete')
             form(action=`/ataraxia/delete/podcast/${podcast._id || ''}` method="POST"  enctype="multipart/form-data")
-              input.button--simple-danger(type="submit" value="Изтрий" onclick="return confirm('Are you sure?')")
-          - const createdDate = h.moment(podcast.created).locale('bg').format('DD.MM.YYYY')
-          .Table-row-item.half-table(data-header='Създадено') #{createdDate}
+              input.button--simple-danger(type="submit" value="Delete" onclick="return confirm('Are you sure?')")
+          - const createdDate = h.moment(podcast.created).format('DD.MM.YYYY')
+          .Table-row-item.half-table(data-header='Created') #{createdDate}

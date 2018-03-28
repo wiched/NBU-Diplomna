@@ -16,7 +16,7 @@ const multerOptions = {
     if (isPhoto) {
       next(null, true);
     } else {
-      next({ message: 'That filetype isn\'t allowed!' }, false);
+      next({ message: "That filetype isn't allowed!" }, false);
     }
   }
 };
@@ -43,39 +43,44 @@ exports.resize = async (req, res, next) => {
   next();
 };
 
-
 exports.searchAll = async (req, res) => {
   const podcastsQuery = Podcast
-  // first find podcasts that match
-  .find({
-    $text: {
-      $search: req.query.q
-    }
-  }, {
-    score: { $meta: 'textScore' }
-  })
-  // the sort them
-  .sort({
-    score: { $meta: 'textScore' }
-  })
-  // limit to only 5 results
-  .limit(5);
+    // first find podcasts that match
+    .find(
+      {
+        $text: {
+          $search: req.query.q
+        }
+      },
+      {
+        score: { $meta: 'textScore' }
+      }
+    )
+    // the sort them
+    .sort({
+      score: { $meta: 'textScore' }
+    })
+    // limit to only 5 results
+    .limit(5);
 
   const videosQuery = Video
-  // first find videos that match
-  .find({
-    $text: {
-      $search: req.query.q
-    }
-  }, {
-    score: { $meta: 'textScore' }
-  })
-  // the sort them
-  .sort({
-    score: { $meta: 'textScore' }
-  })
-  // limit to only 5 results
-  .limit(5);
+    // first find videos that match
+    .find(
+      {
+        $text: {
+          $search: req.query.q
+        }
+      },
+      {
+        score: { $meta: 'textScore' }
+      }
+    )
+    // the sort them
+    .sort({
+      score: { $meta: 'textScore' }
+    })
+    // limit to only 5 results
+    .limit(5);
   const [podcasts, videos] = await Promise.all([podcastsQuery, videosQuery]);
   const results = { podcasts, videos };
   res.json(results);
@@ -90,17 +95,17 @@ exports.getHearts = async (req, res) => {
   });
   const [podcasts, videos] = await Promise.all([podcastQuery, videosQuery]);
   const results = podcasts.concat(videos);
-  res.render('hearted', { title: 'Любими', results });
+  res.render('hearted', { title: 'Favourites', results });
 };
 
 exports.heartVideo = async (req, res) => {
   const hearts = req.user.hearts.map(obj => obj.toString());
   const operator = hearts.includes(req.params.id) ? '$pull' : '$addToSet';
-  const user = await User
-    .findByIdAndUpdate(req.user._id,
-      { [operator]: { hearts: req.params.id } },
-      { new: true }
-    );
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { [operator]: { hearts: req.params.id } },
+    { new: true }
+  );
   res.json(user);
 };
 
@@ -109,5 +114,8 @@ exports.getTopVideos = async (req, res) => {
   const podcastQuery = Podcast.getTopVideos();
   const [podcasts, videos] = await Promise.all([podcastQuery, videosQuery]);
   const topVideos = podcasts.concat(videos);
-  res.render('topVideos', { topVideos, title: '⭐ Топ видеа и подкасти!' });
+  res.render('topVideos', {
+    topVideos,
+    title: '⭐ Top Tutorials And Podcasts!'
+  });
 };

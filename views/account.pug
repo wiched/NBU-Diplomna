@@ -2,17 +2,17 @@ extends layout
 
 block content
   .inner
-    h2 Редактиране на профила
+    h2 Edit Profile
     form(action="/account" method="POST")
-      label(for="name") Име
+      label(for="name") Name
       input(type="text" name="name" value=user.name)
-      label(for="email") Имейл адрес
+      label(for="email") Email Address
       input(type="email" name="email" value=user.email)
-      label(for="password") Нова Парола 
+      label(for="password") New Password
       input(type="password" name="password")
-      label(for="password-confirm") Потвърди паролата
+      label(for="password-confirm") Confirm Password
       input(type="password" name="password-confirm")
-      label(for="level") Ниво
-      - let level = user.level === 10 ? 'Администратор' : 'Потребител'
+      label(for="level") Level
+      - let level = user.level === 10 ? 'Administrator' : 'User'
       div.level= level
-      input.button(type="submit" value="Обнови")
+      input.button(type="submit" value="Update")

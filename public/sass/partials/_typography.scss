@@ -1,16 +1,21 @@
 html {
-  font-size:10px;
+  font-size: 10px;
 }
 
 body {
-  font-size:1.5rem;
-  color:$black;
+  font-size: 1.5rem;
+  color: $black;
 }
 
-h1, h2, h3, h4, h5, h6, {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Tahoma';
   font-weight: 600;
-  letter-spacing:-1px;
+  letter-spacing: -1px;
 }
 
 h1 {
@@ -27,7 +32,7 @@ h3 {
 
 a {
   text-decoration: none;
-  color:$black;
+  color: $black;
 }
 
 p a {
@@ -36,7 +41,6 @@ p a {
 
 .underlined {
   border-bottom: 3px solid $yellow;
-
 }
 
 p {
@@ -48,37 +52,37 @@ p {
   word-wrap: break-word;
   position: relative;
   z-index: 2;
-  margin:0;
-  font-size: 40px;
+  margin: 0;
+  font-size: 26px;
   z-index: 2;
-  line-height:1.1;
+  line-height: 1.1;
   transform: skew(0, -3deg);
   &--long {
     font-size: 30px;
   }
   &:before {
     content: '';
-    width:50px;
-    left:0;
-    top:0;
-    height:100%;
+    width: 50px;
+    left: 0;
+    top: 0;
+    height: 100%;
     // top:10%;
     display: block;
     position: absolute;
     z-index: -1;
-    transform:skew(-5deg)
+    transform: skew(-5deg);
   }
-  line-height:1.1;
+  line-height: 1.1;
   // inline link inside
   a {
     border-bottom: 0;
-    $yellowa: rgba($yellow,0.8);
+    $yellowa: rgba($yellow, 0.8);
     background-image: linear-gradient(to right, $yellowa 100%, $yellowa 50%);
   }
 }
 
 .title--single {
-  max-width: 600px;
+  max-width: 900px;
   margin-top: -9rem;
   font-size: 8rem;
   text-align: center;
@@ -88,10 +92,9 @@ p {
   .title--single {
     font-size: 4rem;
   }
-  .nav__link  {
+  .nav__link {
     span {
-        font-size: 0.7em;
-      
+      font-size: 0.7em;
     }
   }
 }
