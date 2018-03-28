@@ -78,7 +78,7 @@ exports.editPodcast = async (req, res) => {
     confirmOwner(podcast, req.user, req, res);
     // 3. Render out the edit form so the user can update their podcast
     res.render('editPodcast', {
-      title: `Редактиране на "${podcast.name}"`,
+      title: `Editing "${podcast.name}"`,
       podcast
     });
   } else {
