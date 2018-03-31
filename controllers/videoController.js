@@ -105,7 +105,7 @@ exports.indexPage = async (req, res) => {
   }
 
   res.render('combined', {
-    title: 'Последни',
+    title: 'Welcome to DevX Bulgaria',
     results,
     videos,
     podcasts,

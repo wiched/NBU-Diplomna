@@ -4,30 +4,38 @@ const User = mongoose.model('User');
 const promisify = require('es6-promisify');
 
 exports.loginForm = (req, res) => {
-  res.render('login', { title: 'Вход' });
+  res.render('login', { title: 'Login' });
 };
 
 exports.registerForm = (req, res) => {
-  res.render('register', { title: 'Регистрация' });
+  res.render('register', { title: 'Register' });
 };
 
 exports.validateRegister = (req, res, next) => {
   req.sanitizeBody('name');
-  req.checkBody('name', 'Трябва да въведете име!').notEmpty();
-  req.checkBody('email', 'Невалиден имейл!').isEmail();
+  req.checkBody('name', 'You must enter a name!').notEmpty();
+  req.checkBody('email', 'Invalid email!').isEmail();
   req.sanitizeBody('email').normalizeEmail({
     gmail_remove_dots: false,
     remove_extension: false,
     gmail_remove_subaddress: false
   });
-  req.checkBody('password', 'Полето за парола не може да е празно!').notEmpty();
-  req.checkBody('password-confirm', 'Потвърждаващата парола не може да е празна!').notEmpty();
-  req.checkBody('password-confirm', 'Оопа! Паролите не съвпадат').equals(req.body.password);
+  req.checkBody('password', 'Password field should not be empty!').notEmpty();
+  req
+    .checkBody('password-confirm', 'Confirmation password should not be empty!')
+    .notEmpty();
+  req
+    .checkBody('password-confirm', 'oops! The password does not match')
+    .equals(req.body.password);
 
   const errors = req.validationErrors();
   if (errors) {
     req.flash('error', errors.map(err => err.msg));
-    res.render('register', { title: 'Регистрация', body: req.body, flashes: req.flash() });
+    res.render('register', {
+      title: 'Register',
+      body: req.body,
+      flashes: req.flash()
+    });
     return; // stop the fn from running
   }
   next(); // there were no errors!
@@ -41,13 +49,13 @@ exports.register = async (req, res, next) => {
 };
 
 exports.account = (req, res) => {
-  res.render('account', { title: 'Редакция на профила' });
+  res.render('account', { title: 'Edit profile' });
 };
 
 exports.updateAccount = async (req, res) => {
   const updates = {
     name: req.body.name,
-    email: req.body.email,
+    email: req.body.email
   };
 
   const user = await User.findOneAndUpdate(
@@ -55,6 +63,6 @@ exports.updateAccount = async (req, res) => {
     { $set: updates },
     { new: true, runValidators: true, context: 'query' }
   );
-  req.flash('success', '😃 Профилът е обновен!');
+  req.flash('success', '😃 Profile updated!');
   res.redirect('/account');
 };

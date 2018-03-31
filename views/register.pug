@@ -4,12 +4,12 @@ block content
   .inner
     form.form(action="/register" method="POST")
       h2= title
-      label(for="name") Име
+      label(for="name") Name
       input(type="text" name="name")
-      label(for="email") Имейл
+      label(for="email") Mail
       input(type="email" name="email")
-      label(for="password") Парола
+      label(for="password") Password
       input(type="password" name="password")
-      label(for="password-confirm") Потвърждаваща парола
+      label(for="password-confirm") Confirm Password
       input(type="password" name="password-confirm")
-      input.button(type="submit" value="Изпрати →")
+      input.button(type="submit" value="Register →")

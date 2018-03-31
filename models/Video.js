@@ -3,51 +3,53 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const slug = require('slugs');
 
-const videoSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: 'Please enter a video name!'
+const videoSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: 'Please enter a video name!'
+    },
+    slug: String,
+    description: {
+      type: String,
+      trim: true
+    },
+    tags: {
+      type: [String],
+      ref: 'Podcast'
+    },
+    created: {
+      type: Date,
+      default: Date.now
+    },
+    photo: String,
+    type: {
+      type: String,
+      default: 'Video'
+    },
+    youtube: {
+      type: String,
+      required: 'Въведете линк от YouTube',
+      trim: true
+    },
+    author: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: 'You must supply an author'
+    }
   },
-  slug: String,
-  description: {
-    type: String,
-    trim: true
-  },
-  tags: {
-    type: [String],
-    ref: 'Podcast',
-  },
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  photo: String,
-  type: {
-    type: String,
-    default: 'Video'
-  },
-  youtube: {
-    type: String,
-    required: 'Въведете линк от YouTube',
-    trim: true
-  },
-  author: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: 'You must supply an author'
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
-}, {
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true },
-});
+);
 
 // Define our indexes
 videoSchema.index({
   name: 'text',
   description: 'text'
 });
-
 
 videoSchema.pre('save', async function(next) {
   if (!this.isModified('name')) {
@@ -76,18 +78,27 @@ videoSchema.statics.getTagsList = function() {
 videoSchema.statics.getTopVideos = function() {
   return this.aggregate([
     // Lookup Stores and populate their reviews
-    { $lookup: { from: 'reviews', localField: '_id', foreignField: 'video', as: 'reviews' } },
+    {
+      $lookup: {
+        from: 'reviews',
+        localField: '_id',
+        foreignField: 'video',
+        as: 'reviews'
+      }
+    },
     // filter for only items that have 2 or more reviews
     { $match: { 'reviews.1': { $exists: true } } },
     // Add the average reviews field
-    { $project: {
-      photo: '$$ROOT.photo',
-      name: '$$ROOT.name',
-      reviews: '$$ROOT.reviews',
-      slug: '$$ROOT.slug',
-      type: '$$ROOT.type',
-      averageRating: { $avg: '$reviews.rating' }
-    } },
+    {
+      $project: {
+        photo: '$$ROOT.photo',
+        name: '$$ROOT.name',
+        reviews: '$$ROOT.reviews',
+        slug: '$$ROOT.slug',
+        type: '$$ROOT.type',
+        averageRating: { $avg: '$reviews.rating' }
+      }
+    },
     // sort it by our new field, highest reviews first
     { $sort: { averageRating: -1 } },
     // limit to at most 10
@@ -108,7 +119,6 @@ videoSchema.virtual('liked', {
   localField: '_id', // which field on the Video?
   foreignField: 'hearts' // which field on the User?
 });
-
 
 function autopopulate(next) {
   this.populate('reviews');
